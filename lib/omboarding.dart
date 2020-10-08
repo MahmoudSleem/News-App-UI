@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_view_indicator/page_view_indicator.dart';
 
 class OnBoarding extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class OnBoarding extends StatefulWidget {
 
 class _OnBoardingState extends State<OnBoarding> {
   List<PageModel> pages;
+  ValueNotifier<int> _pageViewNotifier = ValueNotifier(0);
 
   void _page() {
     pages = List<PageModel>();
@@ -31,6 +33,7 @@ class _OnBoardingState extends State<OnBoarding> {
         Icons.ac_unit,
         'assets/images/pg1.jpg'));
   }
+
   @override
   Widget build(BuildContext context) {
     _page(); //// في حال لم تتم الاضافة لاتعمل الصوروالنصوص ولايقونات
@@ -90,19 +93,19 @@ class _OnBoardingState extends State<OnBoarding> {
               );
             },
             itemCount: pages.length,
+            onPageChanged: (index){
+              _pageViewNotifier.value = index ;
+            },
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 260 ,left: 20),
+          padding: EdgeInsets.only(top: 260, left: 20),
           child: Align(
-            alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: _drowPaageIndicator()
-            )
-          ),
+              alignment: Alignment.center,
+              child: Container(
+                child: _displayPageIndicator(pages.length),
+              )),
         ),
-
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -119,6 +122,8 @@ class _OnBoardingState extends State<OnBoarding> {
                       color: Colors.white, letterSpacing: 1.1, fontSize: 16),
                 ),
                 onPressed: () {},
+
+                // _displayPageIndicator()
               ),
             ),
           ),
@@ -127,25 +132,22 @@ class _OnBoardingState extends State<OnBoarding> {
     ));
   }
 
-  List<Widget> _drowPaageIndicator()// for draw all circles in indicators
-  {
-    List<Widget> _widget = List<Widget>();
-    for (var i in pages){
-      _widget.add(_drowCircle(Colors.red));
-    }
-    return _widget;
-  }
-
-  Widget _drowCircle(color)// for draw circle
-  {
-    return  Transform.translate(
-      offset: Offset(0, 0),
-      child: Container(
-        margin: EdgeInsets.only(right: 8),
-        width: 15,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: color
+  Widget _displayPageIndicator(int length) {
+    return PageViewIndicator(
+      pageIndexNotifier: _pageViewNotifier,
+      length: length,
+      normalBuilder: (animationController, index) => Circle(
+        size: 8.0,
+        color: Colors.grey,
+      ),
+      highlightedBuilder: (animationController, index) => ScaleTransition(
+        scale: CurvedAnimation(
+          parent: animationController,
+          curve: Curves.ease,
+        ),
+        child: Circle(
+          size: 12.0,
+          color: Colors.red,
         ),
       ),
     );
