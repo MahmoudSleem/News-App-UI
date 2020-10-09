@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:page_view_indicator/page_view_indicator.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'home_screen.dart';
 class OnBoarding extends StatefulWidget {
   @override
   _OnBoardingState createState() => _OnBoardingState();
@@ -93,8 +95,8 @@ class _OnBoardingState extends State<OnBoarding> {
               );
             },
             itemCount: pages.length,
-            onPageChanged: (index){
-              _pageViewNotifier.value = index ;
+            onPageChanged: (index) {
+              _pageViewNotifier.value = index;
             },
           ),
         ),
@@ -121,7 +123,17 @@ class _OnBoardingState extends State<OnBoarding> {
                   style: TextStyle(
                       color: Colors.white, letterSpacing: 1.1, fontSize: 16),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        _updateSeen();
+                        return HomeScreen();
+                      },
+                    ),
+                  );
+                },
 
                 // _displayPageIndicator()
               ),
@@ -151,6 +163,11 @@ class _OnBoardingState extends State<OnBoarding> {
         ),
       ),
     );
+  }
+
+  void _updateSeen() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('seen', true);
   }
 }
 
