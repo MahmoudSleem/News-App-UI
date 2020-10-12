@@ -11,7 +11,10 @@ class _WhatsNewState extends State<WhatsNew> {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[_drawHeader(), _drawTopStories()],
+        children: <Widget>[
+          _drawHeader(),
+          _drawTopStories(),
+        ],
       ),
     );
   }
@@ -66,11 +69,11 @@ class _WhatsNewState extends State<WhatsNew> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(left: 16, top: 16),
+            padding: const EdgeInsets.only(left: 16, top: 8),
             child: _drawSectionTitle('Top Stories'),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 5),
             child: Card(
               child: Column(
                 children: <Widget>[
@@ -161,7 +164,7 @@ class _WhatsNewState extends State<WhatsNew> {
     );
   }
 
-  _drawSectionTitle(String s) {
+  Widget _drawSectionTitle(String s) {
     return Text(
       s,
       style: TextStyle(
@@ -213,7 +216,9 @@ class _WhatsNewState extends State<WhatsNew> {
                   color: Colors.grey,
                   size: 12,
                 ),
-                SizedBox(width: 4,),
+                SizedBox(
+                  width: 4,
+                ),
                 Text(
                   '15 Min',
                   style: TextStyle(
