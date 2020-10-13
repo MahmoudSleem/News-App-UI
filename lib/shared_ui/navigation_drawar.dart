@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_applecation/models/nav_menu.dart';
+import 'package:news_app_applecation/screens/headline_news.dart';
+import 'package:news_app_applecation/screens/onboarding.dart';
+import 'package:news_app_applecation/screens/home_screen.dart';
 class NavigationDrawer extends StatefulWidget {
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
 }
 class _NavigationDrawerState extends State<NavigationDrawer> {
-  List<String> title = [
-    'Explore',
-    'Headline News',
-    'Read Later',
-    'Videos',
-    'Photos',
-    'Setting',
-    'Logout'
+  List <NavMenuItem> navigationMenu = [
+    NavMenuItem("Explore" ,() => HomeScreen() ),
+    NavMenuItem("Headline News" ,() => HeadLineNews() ),
+    NavMenuItem("Read Later" ,() => HeadLineNews() ),
+    NavMenuItem("Videos" ,() => HeadLineNews() ),
+    NavMenuItem("Photos" ,() => HeadLineNews() ),
+    NavMenuItem("Setting" ,() => HeadLineNews() ),
+    NavMenuItem("Logout" ,() => HeadLineNews() ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,7 +29,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               padding: const EdgeInsets.all(4),
               child: ListTile(
                 title: Text(
-                  title[position],
+                  navigationMenu[position].title,
                   style: TextStyle(
                     color: Colors.grey.shade600,
                     fontSize: 22,
@@ -34,11 +39,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   Icons.chevron_right,
                   color: Colors.grey.shade500,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return navigationMenu[position].destination();
+                  }));
+                },
               ),
             );
           },
-          itemCount: title.length,
+          itemCount: navigationMenu.length,
         ),
       ),
     );
