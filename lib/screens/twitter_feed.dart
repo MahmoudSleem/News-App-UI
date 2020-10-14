@@ -11,26 +11,29 @@ class _TwitterFeedState extends State<TwitterFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Twitter Feed"),
+        title: Text("Twitter Feeds"),
         centerTitle: false,
       ),
       drawer: NavigationDrawer(),
       body: ListView.builder(
         itemBuilder: (context, position) {
-          return Card(
-            // child: _cardTwitter(),
-            child: Column(
-              children: [
-                _cardHeader(),
-                _cardBody(),
-                SizedBox(
-                  child: Container(
-                    color: Colors.grey.shade200,
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Card(
+              // child: _cardTwitter(),
+              child: Column(
+                children: [
+                  _cardHeader(),
+                  _cardBody(),
+                  SizedBox(
+                    child: Container(
+                      color: Colors.grey.shade200,
+                    ),
+                    height: 1,
                   ),
-                  height: 1,
-                ),
-                _cardFooter(),
-              ],
+                  _cardFooter(),
+                ],
+              ),
             ),
           );
         },
@@ -56,7 +59,10 @@ class _TwitterFeedState extends State<TwitterFeed> {
               children: [
                 Text(
                   'Mahmoud Sleem',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
@@ -89,8 +95,9 @@ class _TwitterFeedState extends State<TwitterFeed> {
       child: Text(
         'we can also talk about the future of works as the robot advance , and ',
         style: TextStyle(
-          fontSize: 22,
-          color: Colors.black87,
+          fontSize: 18,
+          height: 1.2,
+          color: Colors.grey.shade900,
         ),
       ),
     );
@@ -98,17 +105,26 @@ class _TwitterFeedState extends State<TwitterFeed> {
 
   Widget _cardFooter() {
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8,top: 2, bottom: 2),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               IconButton(
-                  icon: Icon(Icons.repeat),
+                  icon: Icon(
+                    Icons.repeat,
+                    size: 24,
+                  ),
                   color: Colors.orange,
                   onPressed: () {}),
-              Text('25'),
+              Text(
+                '25',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+              ),
             ],
           ),
           Row(
