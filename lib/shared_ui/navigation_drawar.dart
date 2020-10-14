@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_applecation/models/nav_menu.dart';
 import 'package:news_app_applecation/screens/headline_news.dart';
-import 'package:news_app_applecation/screens/onboarding.dart';
+import 'package:news_app_applecation/screens/twetter_feed.dart';
 import 'package:news_app_applecation/screens/home_screen.dart';
+
 class NavigationDrawer extends StatefulWidget {
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
 }
 class _NavigationDrawerState extends State<NavigationDrawer> {
   List <NavMenuItem> navigationMenu = [
-    NavMenuItem("Explore" ,() => HomeScreen() ),
-    NavMenuItem("Headline News" ,() => HeadLineNews() ),
-    NavMenuItem("Read Later" ,() => HeadLineNews() ),
-    NavMenuItem("Videos" ,() => HeadLineNews() ),
-    NavMenuItem("Photos" ,() => HeadLineNews() ),
-    NavMenuItem("Setting" ,() => HeadLineNews() ),
-    NavMenuItem("Logout" ,() => HeadLineNews() ),
+    NavMenuItem("Explore" ,() => HomeScreen()),
+    NavMenuItem("Headline News" ,() => HeadLineNews()),
+    NavMenuItem("Twitter Feed" ,() => TwitterFeed()),
+    NavMenuItem("Videos" ,() => HeadLineNews()),
+    NavMenuItem("Photos" ,() => HeadLineNews()),
+    NavMenuItem("Setting" ,() => HeadLineNews()),
+    NavMenuItem("Logout" ,() => HeadLineNews()),
   ];
 
   @override
@@ -40,6 +41,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   color: Colors.grey.shade500,
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (context){
                     return navigationMenu[position].destination();
                   }));
